@@ -2,6 +2,7 @@ import java.util.*;
 
 public class DayNo {
     private int day, year, N;
+    boolean input_validity = false;
 
     private boolean leap_year() {
         return (year % 100 == 0) ? (year % 400 == 0) : (year % 4 == 0);
@@ -9,19 +10,40 @@ public class DayNo {
 
     public void accept_data() {
         Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("Enter the year");
+            year = sc.nextInt();
+            if (year < 1000 || year >9999) {
+                System.out.println("Invalid input!");
+                break;
+            } else {
+                input_validity = true;
+            }
 
-        System.out.println("Enter the year");
-        year = sc.nextInt();
+            System.out.println("Enter the day number");
+            day = sc.nextInt();
 
-        System.out.println("Enter the day number");
-        day = sc.nextInt();
+            if ((!leap_year() && day == 366) || day > 366 || day < 1) {
+                System.out.println("Invalid input!");
+                input_validity = false;
+                break;
+            } else {
+                input_validity = true;
+            }
 
-        if ((!leap_year() && day == 366) || day > 366 || day < 1) {
-            System.out.println((day == 366) ? "That day does not exist in the year provided!" : "That day does not exist in a year!");
+            System.out.println("Enter the number of days after");
+            N = sc.nextInt();
+
+            if (N > 100 || N < 1) {
+                System.out.println("Invalid input!");
+                input_validity = false;
+                break;
+            } else {
+                input_validity = true;
+            }
+
+            break;
         }
-
-        System.out.println("Enter the number of days after");
-        N = sc.nextInt();
     }
 
     private String d(int d) {
@@ -41,14 +63,16 @@ public class DayNo {
     }
 
     public void date() {
-        String a = this.d(day);
-        int d = N;
-        while (d >= ((leap_year()) ? 366 : 365)) {
-            d -= (leap_year()) ? 366 : 365;
-            year++;
+        if (input_validity) {
+            String a = this.d(day);
+            int d = N;
+            while (d >= ((leap_year()) ? 366 : 365)) {
+                d -= (leap_year()) ? 366 : 365;
+                year++;
+            }
+            String b = this.d(day + d);
+            System.out.println("The required date is: " + a + "\nand after " + N + " days it will be: " + b);
         }
-        String b = this.d(day + d);
-        System.out.println("The required date is: " + a + "\nand after " + N + " days it will be: " + b);
     }
 
 
