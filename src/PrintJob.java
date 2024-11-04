@@ -1,11 +1,15 @@
 public class PrintJob {
-    int job[], Front, Rear, Capacity, Newjob=0;
+    int[] job;
+    int Front;
+    int Rear;
+    int Capacity;
+    int Newjob=0;
 
     PrintJob() {
-        Capacity = 3;
+        Capacity = 20;
         Front = -1;
         Rear = -1;
-        createJob();
+        this.createJob();
     }
 
 
@@ -14,10 +18,10 @@ public class PrintJob {
     }
 
     void addJob() {
-        if ((Rear % Capacity) == Capacity) {
+        if (Rear + 1 == Capacity) {
             System.out.println("Printjob is full, cannot add any more");
         } else {
-            job[++Rear % Capacity] = ++Newjob;
+            job[++Rear] = Newjob++;
         }
     }
 
@@ -29,37 +33,4 @@ public class PrintJob {
         }
     }
 
-//    int sum(int n){
-//        return (int) (Math.floor(n/(Math.pow(10,Math.floor(Math.log10(n))))) + (n%10));
-//    }
-
-    public static void main(String[] args) {
-//        PrintJob a = new PrintJob();
-//        a.addJob();
-//        a.addJob();
-//        a.addJob();
-//        for (int i = 0; i < a.Capacity; i++)
-//            System.out.print(a.job[i] + "\t");
-//        System.out.println("\nFront: " + a.Front + "\tRear: " + a.Rear);
-//        a.removeJob();
-//        a.removeJob();
-//        a.removeJob();
-//        a.addJob();
-//        a.addJob();
-//        a.addJob();
-//        for (int i = 0; i < a.Capacity; i++)
-//            System.out.print(a.job[i] + "\t");
-//        System.out.println("\nFront: " + a.Front + "\tRear: " + a.Rear);
-//        a.removeJob();
-//        a.removeJob();
-//        a.removeJob();
-//        a.addJob();
-//        a.addJob();
-//        a.addJob();
-//        for (int i = 0; i < a.Capacity; i++)
-//            System.out.print(a.job[i] + "\t");
-//        System.out.println("\nFront: " + a.Front + "\tRear: " + a.Rear);
-        RevString r = new RevString();
-        r.lucky_numbers(10);
-    }
 }
