@@ -1,77 +1,50 @@
 import java.util.*;
 
 public class LuckyNumbers {
-    int[] series, copy;
-    int n, prev = 0;
+    int[] nos;
+    int n, size;
 
     LuckyNumbers(int a) {
-        series = new int[a];
-        copy = new int[a];
         n = a;
-        this.populate();
-    }
-
-    void populate() {
-        for (int i = 0; i < n; i++) {
-            series[i] = i + 1;
+        nos = new int[n];
+        for(int i = 0; i < n; i++){
+            nos[i] = i+1;
         }
     }
-
-
-    void removeXthElement(int x) {
-        for (int i = x + prev - 1; i < n; i += x) {
-            System.out.println(i);
-            series[i] = -1;
-        }
-        prev = x;
-    }
-
-    void copyArray() {
-        for (int i = 0; i < n; i++) {
-            copy[i] = series[i];
-        }
-    }
-
-
-    boolean isEqual() {
-        boolean flag = true;
-
-        for (int i = 0; i < n; i++) {
-            if (copy[i] == series[i]) {
-                flag = false;
-                break;
-            }
-        }
-
-        return flag;
-    }
-
 
     void findLuckies() {
-        this.copyArray();
-        this.removeXthElement(2);
-        int count = 3;
-        while (!this.isEqual()) {
-            this.copyArray();
-            this.removeXthElement(count++);
-            System.out.println();
-            this.display();
-        }
-    }
-
-
-    void display() {
-        for (int i = 0; i < n; i++) {
-            if (series[i] != -1) {
-                System.out.print(series[i] + " ");
+        int count = 2;
+        size = n;
+        while (count <= size) {
+            int j = 0;
+            for (int i = 0; i < size; i++) {
+                if ((i + 1) % count != 0) {
+                    nos[j] = nos[i];
+                    j++;
+                }
             }
+            size = j;
+            count++;
         }
     }
+
+    void displayLuckies(){
+        this.findLuckies();
+        System.out.println("THE LUCKY NUMBERS LESS THAN  "+n+" ARE");
+        for (int i = 0; i < size; i++){
+            System.out.println(nos[i]);
+        }
+    }
+
 
     public static void main(String[] args) {
-        LuckyNumbers obj = new LuckyNumbers(25);
-        obj.findLuckies();
-        obj.display();
+        System.out.println("Enter 'n'");
+        int n = (new Scanner(System.in)).nextInt();
+        if(n>0 && n<=50) {
+            LuckyNumbers obj = new LuckyNumbers(n);
+            obj.displayLuckies();
+        } else {
+            System.out.println("INVALID INPUT");
+        }
     }
-
 }
