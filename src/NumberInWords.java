@@ -10,7 +10,7 @@ public class NumberInWords {
     }
 
     String toWords(){
-        String output = ((n>=100)? basic[(int) Math.floor(n/100) - 1] + " HUNDRED AND ": "") + ((n%100<=19)? basic[n%100 - 1]: (tens[((int) (n - 100*Math.floor(n/100)- n%10)/10 - 2)] + " "+ basic[n%10 - 1]));
+        String output = ((n>=100)? basic[(int) Math.floor(n/100) - 1] + " HUNDRED": "") + ((n%100!=0)? " AND "+(((n%100<=19)? basic[n%100 - 1]: (tens[((int) (n - 100*Math.floor(n/100)- n%10)/10 - 2)] + " "+ basic[n%10 - 1]))) : "");
         return output;
     }
 
