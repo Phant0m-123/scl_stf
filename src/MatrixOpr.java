@@ -23,6 +23,18 @@ public class MatrixOpr {
             }
         }
 
+        for(int k = 0; k < n; k++) {
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = 0; j < n - 1 - i; j++) {
+                    if (arr[k][j] > arr[k][j + 1]) {
+                        int temp = arr[k][j];
+                        arr[k][j] = arr[k][j + 1];
+                        arr[k][j + 1] = temp;
+                    }
+                }
+            }
+        }
+
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 if (arr_linear[0] == arr[i][j]){
@@ -35,9 +47,6 @@ public class MatrixOpr {
             }
         }
 
-        for(int i = 0; i < n*n; i++){
-           arr[(int) Math.floor(i/n)][i%n] = arr_linear[i];
-        }
     }
 
     void display(){
